@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th>Título</th>
-            <th>Descrção</th>
+            <th>Descrição</th>
             <th>Status</th>
             <th>Ações</th>
         </tr>

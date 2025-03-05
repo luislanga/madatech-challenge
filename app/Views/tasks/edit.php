@@ -1,5 +1,8 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('content') ?>
-<h2>edit page goes here</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Editar Tarefa</h2>
+    <?php include 'form.php'; ?>
+</div>
 <?= $this->endSection() ?>

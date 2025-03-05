@@ -6,10 +6,6 @@ use App\Models\TaskModel;
 
 class TaskController extends BaseController
 {
-    // public function index()
-    // {
-    //     return view('tasks/index', ['title' => 'Lista de Tarefas']);
-    // }
 
     public function index()
     {
@@ -20,18 +16,7 @@ class TaskController extends BaseController
 
     public function create()
     {
-        if($this->request->getMethod() === 'post') {
-            $model = new TaskModel();
-            $model->save($_POST);
-        }
         return view('tasks/create', ['title' => 'Lista de Tarefas']);
-    }
-
-    public function delete($id)
-    {
-        $model = new TaskModel();
-        $model->delete($id);
-        return redirect()->to('/');
     }
 
     public function createNewTask()
@@ -41,8 +26,30 @@ class TaskController extends BaseController
         return redirect()->to('/');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('tasks/edit');
+        $model = new TaskModel();
+        $task = $model->find($id);
+        return view('tasks/edit',  ['task' => $task]);
+    }
+
+    public function editTask($id)
+    {
+        $model = new TaskModel();
+        $task = $model->find($id);
+
+        if (!$task) {
+            return redirect()->to('/')->with('error', 'Task not found');
+        }
+
+        $model->update($id, $_POST);
+        return redirect()->to('/')->with('success', 'Task updated successfully');
+    }
+
+    public function delete($id)
+    {
+        $model = new TaskModel();
+        $model->delete($id);
+        return redirect()->to('/');
     }
 }
