@@ -14,6 +14,13 @@ class TaskController extends BaseController
         return view('tasks/create');
     }
 
+    public function createNewTask()
+    {
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+    }
+
     public function edit()
     {
         return view('tasks/edit');
