@@ -2,15 +2,20 @@
 
 namespace App\Controllers;
 
-class Task extends BaseController
+class TaskController extends BaseController
 {
     public function index()
     {
-        return view('task');
+        return view('tasks/index');
     }
 
-    public function product($type)
+    public function create()
     {
-        echo '<h2>this is product type ' . $type . '</h2>';
+        return view('tasks/create');
+    }
+
+    public function edit()
+    {
+        return view('tasks/edit');
     }
 }
