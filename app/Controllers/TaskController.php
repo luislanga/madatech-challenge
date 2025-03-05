@@ -6,7 +6,7 @@ class TaskController extends BaseController
 {
     public function index()
     {
-        return view('tasks/index');
+        return view('tasks/index', ['title' => 'Lista de Tarefas']);
     }
 
     public function create()
