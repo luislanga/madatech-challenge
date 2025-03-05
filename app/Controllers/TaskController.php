@@ -38,8 +38,7 @@ class TaskController extends BaseController
     {
         $model = new TaskModel();
         $model->save($_POST);
-
-        echo 'Task created!';
+        return redirect()->to('/');
     }
 
     public function edit()
