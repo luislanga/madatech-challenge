@@ -27,6 +27,13 @@ class TaskController extends BaseController
         return view('tasks/create', ['title' => 'Lista de Tarefas']);
     }
 
+    public function delete($id)
+    {
+        $model = new TaskModel();
+        $model->delete($id);
+        return redirect()->to('/');
+    }
+
     public function createNewTask()
     {
         $model = new TaskModel();

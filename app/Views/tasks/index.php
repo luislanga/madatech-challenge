@@ -22,8 +22,8 @@
                 <td><?= esc($task['status']) ?></td>
                 <td>
                     <div class="d-flex flex-column gap-2">
-                        <a href="/tasks/edit/<?= esc($task['id']) ?>" class="btn btn-primary btn-sm" style="max-width: 64px;">Editar</a>
-                        <a href="/tasks/delete/<?= esc($task['id']) ?>" class="btn btn-danger btn-sm" style="max-width: 64px;" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                        <a href="/edit/<?= esc($task['id']) ?>" class="btn btn-primary btn-sm" style="max-width: 64px;">Editar</a>
+                        <a href="/delete/<?= esc($task['id']) ?>" class="btn btn-danger btn-sm" style="max-width: 64px;" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                     </div>
                 </td>
             </tr>

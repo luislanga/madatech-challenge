@@ -15,3 +15,6 @@ $routes->post('/create', 'TaskController::createNewTask');
 
 // Edit
 $routes->get('/edit', 'TaskController::edit');
+
+// Delete
+$routes->get('/delete/(:num)', 'TaskController::delete/$1');
