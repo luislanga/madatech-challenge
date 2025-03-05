@@ -2,23 +2,37 @@
 
 namespace App\Controllers;
 
+use App\Models\TaskModel;
+
 class TaskController extends BaseController
 {
+    // public function index()
+    // {
+    //     return view('tasks/index', ['title' => 'Lista de Tarefas']);
+    // }
+
     public function index()
     {
-        return view('tasks/index', ['title' => 'Lista de Tarefas']);
+        $model = new TaskModel();
+        $tasks = $model->findAll();
+        return view('tasks/index', ['title' => 'Lista de Tarefas', 'tasks' => $tasks]);
     }
 
     public function create()
     {
-        return view('tasks/create');
+        if($this->request->getMethod() === 'post') {
+            $model = new TaskModel();
+            $model->save($_POST);
+        }
+        return view('tasks/create', ['title' => 'Lista de Tarefas']);
     }
 
     public function createNewTask()
     {
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
+        $model = new TaskModel();
+        $model->save($_POST);
+
+        echo 'Task created!';
     }
 
     public function edit()
