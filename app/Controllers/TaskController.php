@@ -21,10 +21,21 @@ class TaskController extends BaseController
 
     public function createNewTask()
     {
+        $validationConfig = include APPPATH . 'Controllers\helpers\TaskValidation.php';
+        helper(['form']);
+
+        if (!$this->validate($validationConfig['rules'], $validationConfig['messages'])) {
+            return view('tasks/create', [
+                'errors' => $this->validator->getErrors(),
+                'old'    => $this->request->getPost()
+            ]);
+        }
+
         $model = new TaskModel();
-        $model->save($_POST);
-        return redirect()->to('/');
+        $model->save($this->request->getPost());
+        return redirect()->to('/')->with('success', 'Tarefa criada com sucesso!');
     }
+
 
     public function edit($id)
     {
@@ -34,17 +45,29 @@ class TaskController extends BaseController
     }
 
     public function editTask($id)
-    {
-        $model = new TaskModel();
-        $task = $model->find($id);
+{
+    $model = new TaskModel();
+    $task = $model->find($id);
 
-        if (!$task) {
-            return redirect()->to('/')->with('error', 'Task not found');
-        }
-
-        $model->update($id, $_POST);
-        return redirect()->to('/')->with('success', 'Task updated successfully');
+    if (!$task) {
+        return redirect()->to('/')->with('error', 'Task not found');
     }
+
+    $validationConfig = include APPPATH . 'Controllers\helpers\TaskValidation.php';
+    helper(['form']);
+
+    if (!$this->validate($validationConfig['rules'], $validationConfig['messages'])) {
+        return view('tasks/edit', [
+            'errors' => $this->validator->getErrors(),
+            'task'   => $task,
+            'old'     => $this->request->getPost()
+        ]);
+    }
+
+    $model->update($id, $this->request->getPost());
+    return redirect()->to('/')->with('success', 'Task updated successfully');
+}
+
 
     public function delete($id)
     {
