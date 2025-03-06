@@ -1,4 +1,4 @@
-<form action="<?= isset($task) ? '/edit/' . esc($task['id']) : '/create' ?>" method="post" class="card p-4 shadow-sm">
+<form action="<?= isset($task) ? '/edit/' . esc($task['id']) : '/create' ?>" method="post" class="card p-4">
     <div class="mb-3">
         <label for="title" class="form-label">Título</label>
         <input type="text" name="title" class="form-control" id="title" 
