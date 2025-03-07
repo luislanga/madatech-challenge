@@ -36,19 +36,20 @@ class TaskController extends ResourceController
     public function create()
     {
         $validationConfig = include APPPATH . 'Controllers\helpers\TaskValidation.php';
-        $validation =  \Config\Services::validation();
-
+        $validation = \Config\Services::validation();
+    
         if (!$this->validate($validationConfig['rules'], $validationConfig['messages'])) {
             return $this->failValidationErrors($validation->getErrors());
         }
-
+    
         $model = new TaskModel();
         $data = $this->request->getJSON();
-        $model->save($data);
-
+    
+        $insertedId = $model->insert($data);
+    
         return $this->respondCreated([
             'message' => 'Task created successfully',
-            'data'    => $data
+            'data'    => array_merge((array) $data, ['id' => $insertedId])
         ]);
     }
 
